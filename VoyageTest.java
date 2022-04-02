@@ -2,14 +2,14 @@
 // Auteur   : FRIOUICHEN Mohammed
 // BUT INFO 2021/2022
 
-//SAE S2.02 exploitation algorithmique d'un problème
+//SAE S2.02 exploitation algorithmique d'un probleme
 
 /** package & import */
 
 import sae.Pays;
 import sae.Voyage;
 
-/** Classe VoyageTest du package sae de la SAE S2.02 exploitation algorithmique d'un problème */
+/** Classe VoyageTest du package sae de la SAE S2.02 exploitation algorithmique d'un probleme */
 public class VoyageTest{
 
 
@@ -60,8 +60,8 @@ public class VoyageTest{
 
         //Appliquation de l'algorithme de Dijstra
         v = Voyage.calculerTrajetPlusCourt(v, pays_dep);
-
-        //Affichage du plus court chemin entre le pays de départ et le pays d'arrivée
+        
+        //Affichage du plus court chemin entre le pays de depart et le pays d'arrivee
         System.out.println(Pays.plusCourtChemin(pays_dep,pays_arr));
     }
 

@@ -2,29 +2,29 @@
 // Auteur   : FRIOUICHEN Mohammed
 // BUT INFO 2021/2022
 
-//SAE S2.02 exploitation algorithmique d'un problème
+//SAE S2.02 exploitation algorithmique d'un probleme
 
 /** package & import */
 
 package sae;
 import java.util.*;
 
-/** Classe Pays du package sae de la SAE S2.02 exploitation algorithmique d'un problème  */
+/** Classe Pays du package sae de la SAE S2.02 exploitation algorithmique d'un probleme  */
 public class Pays {
     
     /** nomPays est un String, cet argument vise à attribuer un nom à notre Pays */
     private String nomPays;
     
-    /** courtTrajet est une Liste de Pays, cet argument vise à créer une liste de pays auquel il est lié */
+    /** courtTrajet est une Liste de Pays, cet argument vise à creer une liste de pays auquel il est lie */
     private List<Pays> courtTrajet = new LinkedList<>();
     
-    /** quarantaine est un Int, cet argument représente la durée de quarantaine */
+    /** quarantaine est un Int, cet argument represente la duree de quarantaine */
     private Integer quarantaine = Integer.MAX_VALUE;
     
-    /** paysVoisins est une HashMap représentant les pays voisins */
+    /** paysVoisins est une HashMap representant les pays voisins */
     Map<Pays, Integer> paysVoisisns = new HashMap<>();
 
-    /** nConstructeur de notre Class Pays qui prend un string en argument */
+    /** Constructeur de notre Class Pays qui prend un string en argument */
     public Pays(String nomPays) {
         this.nomPays = nomPays;
     }
@@ -41,7 +41,7 @@ public class Pays {
         
     }
     
-    /** Methode getQuarantaine représente le getter de quarantaine */
+    /** Methode getQuarantaine represente le getter de quarantaine */
     public Integer getQuarantaine(){
 
         return quarantaine;
@@ -61,7 +61,7 @@ public class Pays {
 
     }
 
-    /** Methode setQuarantaine qui prend un int en argument qui modifie la durée de quarantaine */
+    /** Methode setQuarantaine qui prend un int en argument qui modifie la duree de quarantaine */
     public void setQuarantaine(Integer d){
 
         quarantaine=d;
@@ -82,7 +82,7 @@ public class Pays {
 
     }
 
-    /** Methode qui affiche le plus court chemin entre le pays de départ et le pays d'arrivée */
+    /** Methode qui affiche le plus court chemin entre le pays de depart et le pays d'arrivee */
     public static String plusCourtChemin(Pays p1,Pays p2){
 
         return ("Le plus court chemin entre : "+p1+" et "+p2+" est : "+p2.getCourtTrajet().toString()+" et "+"["+p2.toString()+"]");
