@@ -1,5 +1,4 @@
 // Fichier  : Voyage.java
-// Auteur   : FRIOUICHEN Mohammed
 // BUT INFO 2021/2022
 
 //SAE S2.02 exploitation algorithmique d'un probleme
