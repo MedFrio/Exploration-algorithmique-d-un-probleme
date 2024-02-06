@@ -53,12 +53,21 @@ public class Pays {
 
     }
     
-    /** Methode getCourtTrajet qui est le getter de courtTrajet */
+    /** Methode getCourtTrajet qui est le getter de courtTrajet - without brackets*/
     public List<Pays> getCourtTrajet(){
-
-        return courtTrajet;
+            
+            return courtTrajet;
 
     }
+
+    /** Methode getCourtTrajet qui est le getter de courtTrajet - without brackets*/
+    public String getCourtTrajet_toString(){
+        String courtTrajet_string=courtTrajet.toString();
+        courtTrajet_string=courtTrajet_string.replace("[", "");
+        courtTrajet_string=courtTrajet_string.replace("]", "");
+        return courtTrajet_string;
+
+}
 
     /** Methode setQuarantaine qui prend un int en argument qui modifie la duree de quarantaine */
     public void setQuarantaine(Integer d){
@@ -84,7 +93,7 @@ public class Pays {
     /** Methode qui affiche le plus court chemin entre le pays de depart et le pays d'arrivee */
     public static String plusCourtChemin(Pays p1,Pays p2){
 
-        return ("Le plus court chemin entre : "+p1+" et "+p2+" est : "+p2.getCourtTrajet().toString()+" et "+"["+p2.toString()+"]");
+        return ("Le plus court chemin entre : "+p1+" et "+p2+" est : "+p2.getCourtTrajet_toString()+" et "+p2.toString());
 
     }
 
