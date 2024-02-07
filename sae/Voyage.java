@@ -8,6 +8,8 @@
 package sae;
 import java.util.*;
 import java.util.Map.Entry;
+import java.io.PrintWriter;
+import java.io.File;
 
 /** Classe Voyage (Graphe) du package sae de la SAE S2.02 exploitation algorithmique d'un probleme  */
 public class Voyage {
@@ -81,6 +83,25 @@ public class Voyage {
         }
         
         return voyage;
+    }
+
+    /** Methode pour exporter voyage en csv */
+    public void exportVoyage() {
+        //format fichier csv - also print neighbours
+        String csvFile = "voyage.csv";
+        String csvSplitBy = ",";
+        try (PrintWriter writer = new PrintWriter(new File(csvFile))) {
+            StringBuilder sb = new StringBuilder();
+            for (Pays p: pays) {
+                sb.append(p.toString());
+                sb.append(csvSplitBy);
+                sb.append(p.getQuarantaine());
+                sb.append("\n");
+            }
+            writer.write(sb.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

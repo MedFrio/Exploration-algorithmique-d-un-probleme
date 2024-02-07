@@ -35,7 +35,7 @@ public class VoyageTest{
         paysF.addDestination(paysH,0);
         paysH.addDestination(paysG,0);
         paysG.addDestination(paysF,0);
-        paysA.addDestination(paysG,50);
+        paysA.addDestination(paysG,0);
         //Creation du graphe (voyage)
 
         Voyage v = new Voyage();
@@ -61,5 +61,7 @@ public class VoyageTest{
         
         //Affichage du plus court chemin entre le pays de depart et le pays d'arrivee
         System.out.println(Pays.plusCourtChemin(pays_dep,pays_arr));} 
+
+        //Affichage graphique pour la creation de pays et voyages ou on peut add destination, ajouter pays, calculer trajet plus court, plus court chemin
 
 }
