@@ -1,7 +1,5 @@
-b,0
-e,0
-c,0
-z,0
-a,0
-d,0
-f,0
+Pays,Quarantaine,Ce fichier contient uniquement les pays et leur duree de quarantaine et non les destinations
+B,0
+D,5
+C,5
+A,0
