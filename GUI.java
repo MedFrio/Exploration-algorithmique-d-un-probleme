@@ -147,7 +147,7 @@ public class GUI {
                 }
                 else if (at_least_one == true) {
                     v.exportVoyage();
-                    JOptionPane.showMessageDialog(null, "Voyage exporté avec succès.");
+                    JOptionPane.showMessageDialog(null, "Voyage exporté avec succès.\n Attention : Ce fichier contient uniquement les pays et leur duree de quarantaine et non les destinations");
                 } 
                 else {
                     JOptionPane.showMessageDialog(null, "Erreur inconnue.");

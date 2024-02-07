@@ -95,8 +95,6 @@ public class Voyage {
             sb.append("Pays");
             sb.append(csvSplitBy);
             sb.append("Quarantaine");
-            sb.append(csvSplitBy);
-            sb.append("Ce fichier contient uniquement les pays et leur duree de quarantaine et non les destinations");
             sb.append("\n");
             for (Pays p: pays) {
                 sb.append(p.toString());
