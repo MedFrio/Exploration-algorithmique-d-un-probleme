@@ -70,12 +70,17 @@ public class GUI {
                     "Pays arrivée:", pays2,
                     "Durée (0 MIN - 1000 MAX):", duree
                 };
+            try {
                 int option = JOptionPane.showConfirmDialog(null, message, "Ajouter Destination", JOptionPane.OK_CANCEL_OPTION);
-                if (option == JOptionPane.OK_OPTION && !duree.getText().equals("") && !duree.getText().equals(null) && !pays1.getSelectedItem().equals(pays2.getSelectedItem()) && !pays1.equals(null) && !pays2.equals(null) && Integer.parseInt(duree.getText())>=0 && Integer.parseInt(duree.getText())<=1000){
+                //verify d is a number
+                if (option == JOptionPane.OK_OPTION && !duree.getText().equals("") && !duree.getText().equals(null) && !pays1.getSelectedItem().equals(pays2.getSelectedItem()) && !pays1.equals(null) && !pays2.equals(null) && Integer.parseInt(duree.getText())>=0 && Integer.parseInt(duree.getText())<=1000  ) {
                     Pays p1 = (Pays) pays1.getSelectedItem();
                     Pays p2 = (Pays) pays2.getSelectedItem();
                     int d = Integer.parseInt(duree.getText());
                     p1.addDestination(p2, d);
+
+                    
+
                 }
                 else if (JOptionPane.CANCEL_OPTION == option || JOptionPane.CLOSED_OPTION == option) {
                     System.out.println("Cancelled");
@@ -83,6 +88,9 @@ public class GUI {
                 else {
                     JOptionPane.showMessageDialog(null, "Erreur dans les données entrées. Veuillez réessayer.");
                 }
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(null, "Erreur dans les données entrées. Veuillez réessayer.");
+            }
             }});
         calculerTrajetPlusCourt.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
