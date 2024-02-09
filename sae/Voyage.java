@@ -27,6 +27,10 @@ public class Voyage {
     public void ajouterPays(Pays p) {
         pays.add(p);
     }
+    /** Methode vider les pays */
+    public void viderPays() {
+        pays.clear();
+    }
 
 
     /** Methode static prenant un hashset de pays en argument, représentant les pays non traites de l'algorithme et retourne un int de duree la plus courte */

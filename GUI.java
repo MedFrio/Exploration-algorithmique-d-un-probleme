@@ -13,17 +13,22 @@ public class GUI {
         JFrame frame = new JFrame("Voyage");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 400);
-        frame.setLayout(new GridLayout(2, 1));
+        frame.setLayout(new GridLayout(3, 2));
 
         JButton addPays = new JButton("Ajouter Pays");
         JButton addDestination = new JButton("Ajouter Destination");
         JButton calculerTrajetPlusCourt = new JButton("Calculer Trajet Plus Court");
         JButton Export_Voyage = new JButton("Export Voyage");
+        JButton Dev_DUMP = new JButton("★DEV_DUMP");
+        JButton Dev_Generate = new JButton("★DEV_GENERATE");
+
 
         frame.add(addPays);
         frame.add(addDestination);
         frame.add(calculerTrajetPlusCourt);
         frame.add(Export_Voyage);
+        frame.add(Dev_DUMP);
+        frame.add(Dev_Generate);
 
 
 
@@ -138,37 +143,54 @@ public class GUI {
                 }
             }});
         Export_Voyage.addActionListener(new ActionListener() {
-            boolean at_least_one = false;
             public void actionPerformed(ActionEvent e) {
 
                 if (v.getPays().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Voyage non exportable, veuillez ajouter des pays.");
+                    
                 }
-                v.getPays().forEach(p -> {
-                    if (!p.getPaysVoisins().isEmpty()) {
-                        at_least_one = true;
-                    }
-                
-            
-
-                });
-                if (at_least_one != true) {
-                    JOptionPane.showMessageDialog(null, "Voyage non exportable, veuillez ajouter des destinations à au moins un pays.");
-                }
-                else if (at_least_one == true) {
+                else{
                     v.exportVoyage();
                     JOptionPane.showMessageDialog(null, "Voyage exporté avec succès.\n Attention : Ce fichier contient uniquement les pays et leur duree de quarantaine et non les destinations");
-                } 
-                else {
-                    JOptionPane.showMessageDialog(null, "Erreur inconnue.");
                 }
+       
 
 
             }
         });
+        Dev_DUMP.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                v.viderPays();
+                JOptionPane.showMessageDialog(null, "Voyage vidé avec succès.");
+            }
+        });
+        Dev_Generate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               //Ask for number of countries
+                int number_of_countries = 0;
+                while (number_of_countries == 0) {
+                    // if the user cancel or close the dialog, close
+                    if (JOptionPane.showConfirmDialog(null, "Générer un nombre de pays?", "Générer Pays", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+                        return;
+                    }
+                    String number_of_countries_string = JOptionPane.showInputDialog("Nombre de pays à générer");
+                    try {
+                        number_of_countries = Integer.parseInt(number_of_countries_string);
+                    } catch (NumberFormatException nfe) {
+                        JOptionPane.showMessageDialog(null, "Erreur dans les données entrées. Veuillez réessayer.");
+                    }
+                }
+                //Generate countries
+                for (int i = 0; i < number_of_countries; i++) {
+                    Pays p = new Pays("Pays" + i);
+                    v.ajouterPays(p);
+                }
+
+
+                JOptionPane.showMessageDialog(null, "Pays générés avec succès.");
+
+            }
+        });
     }
-
-
-
-    
+   
 }
