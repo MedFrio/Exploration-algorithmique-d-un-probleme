@@ -12,7 +12,7 @@ public class GUI {
         Voyage v = new Voyage();
         JFrame frame = new JFrame("Voyage");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 400);
+        frame.setSize(600, 600);
         frame.setLayout(new GridLayout(3, 2));
 
         JButton addPays = new JButton("Ajouter Pays");
@@ -21,6 +21,8 @@ public class GUI {
         JButton Export_Voyage = new JButton("Export Voyage");
         JButton Dev_DUMP = new JButton("★DEV_DUMP");
         JButton Dev_Generate = new JButton("★DEV_GENERATE");
+        JButton Dev_GRAPH = new JButton("★DEV_GRAPH");
+        JButton Dev_STATS = new JButton("★DEV_STATS");
 
 
         frame.add(addPays);
@@ -29,6 +31,13 @@ public class GUI {
         frame.add(Export_Voyage);
         frame.add(Dev_DUMP);
         frame.add(Dev_Generate);
+        frame.add(Dev_GRAPH);
+        frame.add(Dev_STATS);
+        //dev graphe inactif
+        Dev_GRAPH.setEnabled(false);
+
+        //Block frame dimension not resizable
+        frame.setResizable(false);
 
 
 
@@ -52,6 +61,11 @@ public class GUI {
                     System.out.println(pays);
                     p = new Pays(pays);
                 }
+                //pays already exists
+                if (v.getPays().toString().contains(pays)) {
+                    JOptionPane.showMessageDialog(null, "Pays déjà existant.");
+                }
+                else
                 if (p != null){
                 v.ajouterPays(p);
             }
@@ -150,6 +164,7 @@ public class GUI {
                     
                 }
                 else{
+
                     v.exportVoyage();
                     JOptionPane.showMessageDialog(null, "Voyage exporté avec succès.\n Attention : Ce fichier contient uniquement les pays et leur duree de quarantaine et non les destinations");
                 }
@@ -180,17 +195,104 @@ public class GUI {
                         JOptionPane.showMessageDialog(null, "Erreur dans les données entrées. Veuillez réessayer.");
                     }
                 }
+                
                 //Generate countries
                 for (int i = 0; i < number_of_countries; i++) {
                     Pays p = new Pays("Pays" + i);
                     v.ajouterPays(p);
+                    if (v.getPays().size() >1){
+                        //int d >=0 && d<=1000;
+                        Integer d=-1;
+                        while (d <= 0 || d >= 1000) {
+                            d = (int) (Math.random() * 1000);
+                        }
+                        Pays[] listes_pays = v.getPays().toArray(new Pays[v.getPays().size()]);
+                        int random_pays= (int) (Math.random() * v.getPays().size());
+                        while (listes_pays[random_pays]==p){
+                            random_pays = (int) (Math.random() * v.getPays().size()-1);
+                        }
+                        
+                        listes_pays[random_pays].addDestination(p, (Integer) d);
+                        System.out.println(listes_pays[random_pays] + " " + p + " " + (Integer) d);
+                        
+                    }
+                    
                 }
-
-
+                if (v.getPays().size() == 0){
+                    JOptionPane.showMessageDialog(null, "Nombre de pays fournies negatif ou nul. Veuillez réessayer.");
+                }
+                else
                 JOptionPane.showMessageDialog(null, "Pays générés avec succès.");
+                //Set <Pays> : find pays named Pays0
+                Pays pays_depart = null;
+                Pays pays_arrivee = null;
+                for (Pays p : v.getPays()) {
+                    if (p.toString().equals("Pays0")) {
+                    pays_depart = p;
+                    }
+                }
+                //get size of pays
+                int size = v.getPays().size();
+                //with size find last pays
+                for (Pays p : v.getPays()) {
+                    if (p.toString().equals("Pays" + (size - 1))) {
+                        pays_arrivee = p;
+                    }
+                }
+                System.out.println("Pays de départ : " + pays_depart);
+                Voyage.calculerTrajetPlusCourt(v, pays_depart);
+                System.out.println(Pays.plusCourtChemin(pays_depart, pays_arrivee));
 
             }
+
         });
+
+        Dev_GRAPH.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Draw graph - GUI (of countries)
+                JFrame frame3 = new JFrame("Graph");
+                frame3.setSize(400, 400);
+                frame3.setLayout(new GridLayout(1, 1));
+                JLabel label = new JLabel("Graph");
+                frame3.add(label);
+                frame3.setVisible(true);
+                
+                        
+                        
+
+
+            }
+
+        });
+        Dev_STATS.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Show stats
+                if (v.getPays().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Aucun pays dans le voyage.");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Nombre de pays : " + v.getPays().size());
+                    //STATISTICS
+                    int max = 0;
+                    int min = 1000;
+                    int sum = 0;
+                    for (Pays p : v.getPays()) {
+                        if (p.getQuarantaine() > max) {
+                            max = p.getQuarantaine();
+                        }
+                        if (p.getQuarantaine() < min) {
+                            min = p.getQuarantaine();
+                        }
+                        sum += p.getQuarantaine();
+                    }
+                    JOptionPane.showMessageDialog(null, "Durée de quarantaine maximale : " + max + "\nDurée de quarantaine minimale : " + min + "\nDurée de quarantaine moyenne : " + sum / v.getPays().size());
+
+
+                }
+            }
+
+        });
+
     }
    
 }
