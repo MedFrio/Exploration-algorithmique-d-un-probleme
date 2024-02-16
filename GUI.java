@@ -23,6 +23,7 @@ public class GUI {
         JButton Dev_Generate = new JButton("★DEV_GENERATE");
         JButton Dev_GRAPH = new JButton("★DEV_GRAPH");
         JButton Dev_STATS = new JButton("★DEV_STATS");
+        JButton Quit = new JButton("Quitter");
 
 
         frame.add(addPays);
@@ -33,6 +34,7 @@ public class GUI {
         frame.add(Dev_Generate);
         frame.add(Dev_GRAPH);
         frame.add(Dev_STATS);
+        frame.add(Quit);
         //dev graphe inactif
         Dev_GRAPH.setEnabled(false);
 
@@ -68,7 +70,10 @@ public class GUI {
                 else
                 if (p != null){
                 v.ajouterPays(p);
-            }
+                //Desactivate button
+                Dev_Generate.setEnabled(false);
+                }
+
         }
         });
 
@@ -177,6 +182,10 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 v.viderPays();
                 JOptionPane.showMessageDialog(null, "Voyage vidé avec succès.");
+                //Activate button
+                Dev_Generate.setEnabled(true);
+                //activate ajouter pays
+                addPays.setEnabled(true);
             }
         });
         Dev_Generate.addActionListener(new ActionListener() {
@@ -223,6 +232,10 @@ public class GUI {
                 }
                 else
                 JOptionPane.showMessageDialog(null, "Pays générés avec succès.");
+                //Deactivate button
+                Dev_Generate.setEnabled(false);
+                //deactivate ajouter pays
+                addPays.setEnabled(false);
                 //Set <Pays> : find pays named Pays0
                 Pays pays_depart = null;
                 Pays pays_arrivee = null;
@@ -291,6 +304,12 @@ public class GUI {
                 }
             }
 
+        });
+        Quit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+
+            }
         });
 
     }
